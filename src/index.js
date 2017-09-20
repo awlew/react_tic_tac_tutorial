@@ -15,12 +15,13 @@ class Board extends React.Component {
     super();
     this.state = {
       squares: Array(9).fill(null), //fill array held by gameboard, assuming 0 to 8
+      bXIsNext: true, //bool for determining who's turn
     }
   }
   handleClick(i){
     const squares = this.state.squares.slice();
-    squares[i] = 'X';
-    this.setState({squares: squares});
+    squares[i] = this.state.bXIsNext ? 'X' : '0';
+    this.setState({squares: squares, bXIsNext: !this.state.bXIsNext});
   }
   renderSquare(i) {
     return (
@@ -33,7 +34,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = 'Next player: ' + (this.state.bXIsNext ? 'X' : 'O');
 
     return (
       <div>
